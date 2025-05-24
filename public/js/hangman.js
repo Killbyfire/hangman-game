@@ -13,7 +13,21 @@ const maxGuesses = 6;
 let guessesLeft = maxGuesses;
 
 const wordListLanguage = "dutch";
+let currentRoomID = "";
 
+function getPlayerUUID() {
+  return localStorage.getItem("playerUUID");
+}
+
+const currentUrl = location.href;
+if (currentUrl.includes("?room=")) {
+  // Get the current room url out of the url
+  currentRoomID = currentUrl.split("?room=")[1].split("&")[0];
+}
+
+var socket = io();
+
+// Add support for spaces
 let pickedWord = "temp";
 let pickedWordArray = pickedWord.split("");
 
@@ -130,3 +144,9 @@ async function resetGame() {
 }
 
 resetGame();
+
+socket.on("connect", () => {
+  socket.on("disconnect", () => {
+    socket.emit("leaveRoom", currentRoomID, getPlayerUUID());
+  });
+});

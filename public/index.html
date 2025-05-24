@@ -3,25 +3,29 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="css/hangman.css" rel="stylesheet" />
-    <title>Hangman</title>
+    <title>Document</title>
   </head>
   <body>
-    <div class="hangmanContainer"></div>
-    <h2>Correct guesses</h2>
-    <div class="correctContainer"></div>
-    <br />
-    <h2>All guesses</h2>
-    <div class="guessContainer"></div>
-    <br />
-    <h2 class="guessesLeft"></h2>
-    <div class="guessInput">
-      <span class="alertDialog"></span><br />
-      <label>Guess</label>
-      <input type="text" maxlength="1" />
+    <h1>Multiplayer hangman</h1>
+    <!-- One chooses the word and other version is both guess  -->
+    <div>
+      <select class="createRoomSelect">
+        <option value="switch">
+          Switch (one player chooses a word other one guesses)
+        </option>
+        <option value="guess">
+          Guess (both players guess while alternating guesses)
+        </option>
+      </select>
+      <button class="createRoomButton">Create room</button>
     </div>
-    <button class="resetButton">Reset game</button>
-    <button class="giveUpButton">Give up</button>
+    <div>
+      <input class="joinRoomInput" type="text" />
+      <button class="joinRoomButton">Join room</button>
+    </div>
+
+    <a href="/game">Play singleplayer</a>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="js/main.js"></script>
   </body>
-  <script src="js/hangman.js"></script>
 </html>
